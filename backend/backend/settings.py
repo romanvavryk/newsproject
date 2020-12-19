@@ -25,7 +25,7 @@ SECRET_KEY = 'of)^3a1gn=rfr&@!fds8i0(3u2e*^xi^z%#n=-__i&yte6p+sp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-52-29-34-119.eu-central-1.compute.amazonaws.com']
 
 
 # Application definition
@@ -41,7 +41,14 @@ INSTALLED_APPS = [
     'newsweb.apps.NewswebConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'django_jenkins',
 ]
+
+JENKINS_TASKS = ('django_jenkins.tasks.run_pylint',
+                 'django_jenkins.tasks.run_pep8',
+                 'django_jenkins.tasks.run_pyflakes',
+                 'django_jenkins.tasks.with_coverage',
+                 'django_jenkins.tasks.django_tests',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
